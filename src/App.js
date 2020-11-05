@@ -4,6 +4,8 @@ import { Cards, CountryPicker, Chart } from './components'
 import appStyles from './App.module.sass'
 import { fetchData } from './api'
 
+import covid19Image from './images/covid-19.png'
+
 
 class App extends React.Component {
   state = {
@@ -27,6 +29,7 @@ class App extends React.Component {
     
     return (
       <div className={appStyles.container}>
+        <img className={appStyles.image} src={covid19Image} alt="COVID-19"/>
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange}/>
         <Chart data={data} country={country} />

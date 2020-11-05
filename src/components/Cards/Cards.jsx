@@ -30,7 +30,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             lastUpdate={lastUpdateFormatted}
           />
           <CardItem
-            name=""
+            name="Deaths"
             value={deaths.value}
             description="Number of deaths caused by COVID-19"
             activeStyle={cardsStyles.deaths}

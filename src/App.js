@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Cards, CountryPicker, LineChart, BarChart } from './components'
+import { IntervalPicker, Cards, CountryPicker, LineChart, BarChart } from './components'
 import appStyles from './App.module.sass'
-import { fetchData } from './api'
+import { fetchData, fetchLatestData } from './api'
 
 import covid19Image from './images/covid-19.png'
 
@@ -10,7 +10,11 @@ import covid19Image from './images/covid-19.png'
 class App extends React.Component {
   state = {
     data: {},
-    country: ''
+    country: {
+      name: '',
+      code: ''
+    },
+    interval: 'total'
   }
 
   async componentDidMount() {
@@ -20,8 +24,33 @@ class App extends React.Component {
   }
 
   handleCountryChange = async (country) => {
-    const fetchedData = await fetchData(country)
-    this.setState({ data: fetchedData, country: country })
+    let fetchedData
+
+    if(this.state.interval === 'total') {
+      fetchedData = await fetchData(country.code)
+    } else if(this.state.interval === 'latest') {
+      fetchedData = await fetchLatestData(country.code)
+    }
+
+    if(fetchedData) {
+      this.setState({ data: fetchedData, country })
+    }
+  }
+
+  handleIntervalChange = async (interval) => {
+    const { country } = this.state
+
+    let fetchedData
+
+    if(interval === 'total') {
+      fetchedData = await fetchData(country.code)
+    } else if(interval === 'latest'){
+      fetchedData = await fetchLatestData(country.code)
+    }
+    
+    if(fetchedData) {
+      this.setState({ data: fetchedData, interval })
+    }
   }
 
   render() {
@@ -30,9 +59,10 @@ class App extends React.Component {
     return (
       <div className={appStyles.container}>
         <img className={appStyles.image} src={covid19Image} alt="COVID-19"/>
+        <IntervalPicker handleIntervalChange={this.handleIntervalChange}/>
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange}/>
-        {country ? <BarChart data={data} country={country} /> : <LineChart data={data} /> }
+        {country.code || this.state.interval === 'latest' ? <BarChart data={data} countryName={country.name} /> : <LineChart data={data} /> }
       </div>
     )
   }

@@ -44,6 +44,15 @@ yarn install
 yarn start
 ```
 
+## Tools
+
+1. React.js
+2. Material-UI
+3. Axios
+4. Chart.js
+5. Moment.js
+6. Sass
+
 
 
 ## API
@@ -51,6 +60,7 @@ yarn start
 1. [https://covid19.mathdro.id/api](https://covid19.mathdro.id/api)
 
 2. [https://api.covid19api.com](https://api.covid19api.com)
+
 
 
 

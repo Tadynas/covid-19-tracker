@@ -70,4 +70,4 @@ You will also see any lint errors in the console.
 
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and deployed to [Netlify](https://app.netlify.com)
